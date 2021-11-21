@@ -24,5 +24,6 @@ export const get = async (req, res) => {
       farms: await Farm.getByUser(req.locals.user),
     },
   };
+
 }
 

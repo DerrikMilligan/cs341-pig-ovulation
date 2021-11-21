@@ -42,7 +42,7 @@
 			<input type='text' bind:value={farmRegion} class='form-control' name='farmRegion' id='farmRegion'>
 		</div>
 
-		<button type='submit' class='btn btn-primary' on:click={createFarm}> Add Farm</button>
+		<button class='btn btn-primary' on:click={createFarm}> Add Farm</button>
 		{#if errorMessage.length > 0}
 			<div class="alert alert-danger py-2" role="alert">
 				{errorMessage}

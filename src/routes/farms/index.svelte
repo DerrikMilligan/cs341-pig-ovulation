@@ -1,7 +1,6 @@
 <script context="module">
   export async function load({ fetch }) {
     const res = await fetch('/farms/getfarms');
-
     if (res.ok) {
       const body = await res.json();
       return {
@@ -12,7 +11,6 @@
 </script>
 
 <script lang="ts">
-
 type Farm = {
     uid: string;
 		name: string;
@@ -32,6 +30,7 @@ type Farm = {
     <li class="p-1"><a href='farms/{farm.uid}' class="text-decoration-none fs-3">{farm.name}</a></li>
   {/each}
 </ul>
+
 <a href='/farms/new' class='btn btn-primary'>Add New Farm</a>
 
 <style>

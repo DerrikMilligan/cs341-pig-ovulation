@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 
 import { userSchema } from './User';
-
 // Create the schema
 export const farmSchema = new mongoose.Schema({
   name:  String,
@@ -24,15 +23,15 @@ export default {
     if (!mongoose.Types.ObjectId.isValid(user._id)) {
       return null;
     }
-    
     return await Farm.find({ users: user._id });
   },
 
   // Create a new farm
-  create: async ({ name, region }) => {
+  create: async ({ name, region, user }) => {
     const farm = new Farm({
-      name,
-      region,
+      name: name,
+      region: region,
+      users: [user]
     });
 
     await farm.save();
