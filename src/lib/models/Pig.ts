@@ -13,7 +13,7 @@ export const pigSnapshotSchema = new mongoose.Schema({
 export const pigSchema = new mongoose.Schema({
   name:        String,
   img:         String,
-  birthDate:   String,
+  birthDate:   Date,
   breed:       String,
   description: String,
   farmId:      Number,
@@ -27,7 +27,7 @@ export const PigSnapshot = mongoose.model('PigSnapshot', pigSnapshotSchema);
 export default {
 
   // Method to retreive a Pig by their id
-  getByID: async (id: Number) => {
+  getById: async (id: Number) => {
     return await Pig.findById(id).exec();
   },
 

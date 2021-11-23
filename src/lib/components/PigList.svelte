@@ -4,17 +4,21 @@
 </script>
 
 <ul class="d-flex flex-wrap justify-content-evenly ps-0">
-  {#each pigs as pig}
-    <li class="m-2 rounded-1 card list-unstyled">
-      <a class="text-dark text-decoration-none" href="/pigs/{pig.uid}">
-        <div class="p-3">
-          <img class="rounded-1 w-100" src="{ pig.img }" alt="Photo of { pig.name }">
-          <h2 class="h4 py-1">{pig.name}</h2>
-          <p>{pig.description}</p>
-        </div>
-      </a>
-    </li>
-  {/each}
+  {#if (!pigs.length)}
+    <p class="p-5">No pigs to display</p>
+  {:else}
+    {#each pigs as pig}
+      <li class="m-2 rounded-1 card list-unstyled">
+        <a class="text-dark text-decoration-none" href="/pigs/{pig.uid}">
+          <div class="p-3">
+            <img class="rounded-1 w-100" src="{ pig.img }" alt="Photo of { pig.name }">
+            <h2 class="h4 py-1">{pig.name}</h2>
+            <p>{pig.description}</p>
+          </div>
+        </a>
+      </li>
+    {/each}
+  {/if}
 </ul>
 
 <style>

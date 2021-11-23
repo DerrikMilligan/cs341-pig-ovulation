@@ -11,10 +11,7 @@
 </script>
 
 <script lang="ts">
-type Farm = {
-  uid: string;
-  name: string;
-};
+  import type { Farm } from '$lib/types';
 
 export let farms: Farm[];
 </script>
@@ -26,9 +23,13 @@ export let farms: Farm[];
 <h1 class="mx-auto">My Farms</h1>
 
 <ul class="list-unstyled mx-auto w-75">
-  {#each farms as farm (farm.uid)}
-    <li class="p-1"><a href='farms/{farm.uid}' class="text-decoration-none fs-3">{farm.name}</a></li>
-  {/each}
+  {#if (!farms.length)}
+    <p class="p-5">No farms to display</p>
+    {:else}
+    {#each farms as farm (farm.uid)}
+      <li class="p-1"><a href='farms/{farm.uid}' class="text-decoration-none fs-3">{farm.name}</a></li>
+    {/each}
+  {/if}
 </ul>
 
 <a href='/farms/new' class='btn btn-primary'>Add New Farm</a>

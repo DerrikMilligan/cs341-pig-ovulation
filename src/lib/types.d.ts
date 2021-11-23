@@ -7,9 +7,14 @@ export type Pig = {
 	uid: string;
 	name: string;
 	img: string;
-	birthDate: string;
+	birthDate: Date;
 	breed: string;
 	description: string;
 	farmId: string;
 };
 
+export type Farm = {
+	uid: string;
+	name: string;
+	users: [];
+};

@@ -1,3 +1,4 @@
+import { connectToDatabase, Pig } from '$lib/models';
 
 const pigs = [
   {
@@ -73,3 +74,17 @@ export const post = async (req, res) => {
     }
   }
 }
+
+// export const post = async (req, res) => {
+//   await connectToDatabase();
+//   const data = JSON.parse(req);
+
+//   return {
+//     status: 200,
+//     body: {
+//       pigs: await Pig.getByFarmId(data.farmId),
+//     }
+//   }
+// }
+
+
