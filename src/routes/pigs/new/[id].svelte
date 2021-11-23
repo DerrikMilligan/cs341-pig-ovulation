@@ -20,7 +20,7 @@
     e.preventDefault();
 
     const imageEl = document.querySelector('#image');
-    const imageString = await toBase64(imageEl.files[0])
+    const imageString = await toBase64(imageEl.files[0]);
 
 		console.log(`Pig added ${name} ${description} ${breed} ${dob} ${$page.params.id}`);
 		const res = await fetch(
