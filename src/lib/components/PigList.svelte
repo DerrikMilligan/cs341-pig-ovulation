@@ -9,7 +9,7 @@
   {:else}
     {#each pigs as pig}
       <li class="m-2 rounded-1 card list-unstyled">
-        <a class="text-dark text-decoration-none" href="/pigs/{pig.uid}">
+        <a class="text-dark text-decoration-none" href="/pigs/{pig._id}">
           <div class="p-3">
             <img class="rounded-1 w-100" src="{ pig.img }" alt="Photo of { pig.name }">
             <h2 class="h4 py-1">{pig.name}</h2>

@@ -11,7 +11,7 @@
 </script>
 
 <script lang="ts">
-  import type { Farm } from '$lib/types';
+import type { Farm } from '$lib/types';
 
 export let farms: Farm[];
 </script>
@@ -26,8 +26,8 @@ export let farms: Farm[];
   {#if (!farms.length)}
     <p class="p-5">No farms to display</p>
     {:else}
-    {#each farms as farm (farm.uid)}
-      <li class="p-1"><a href='farms/{farm.uid}' class="text-decoration-none fs-3">{farm.name}</a></li>
+    {#each farms as farm (farm._id)}
+      <li class="p-1"><a href="farms/{farm._id}" class="text-decoration-none fs-3">{farm.name}</a></li>
     {/each}
   {/if}
 </ul>

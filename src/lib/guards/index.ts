@@ -13,7 +13,7 @@ export const redirectToLoginResponse = { status: 302, redirect: loginPath };
 export async function userNeedsToLogin({ page, session }) {
   // Check the auth for logged-in-ness
   const loggedIn = session !== null && session.user !== null && session.user !== undefined;
-  console.log(session.user);
+  // console.log(session.user);
 
   // console.log(`[guards][authGuard] Current path: ${page.path}`);
   // console.log(`[guards][authGuard] User is ${loggedIn ? 'logged in' : 'not logged in'}.`);

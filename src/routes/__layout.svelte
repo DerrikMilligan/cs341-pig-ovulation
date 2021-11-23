@@ -19,7 +19,7 @@
 	import Navigation from '$lib/components/Navigation.svelte';
 
 	// Import all the bootstrap styles
-	import 'bootstrap/dist/css/bootstrap.min.css';
+	// import 'bootstrap/dist/css/bootstrap.min.css';
 
 	// Import our global styles
 	import '../app.css';

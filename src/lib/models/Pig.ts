@@ -16,7 +16,7 @@ export const pigSchema = new mongoose.Schema({
   birthDate:   Date,
   breed:       String,
   description: String,
-  farmId:      Number,
+  farmId:      String,
 });
 
 // Create the actual model to use
@@ -32,19 +32,19 @@ export default {
   },
 
   // Lookup the user with a sesionId
-  getByFarmId: async (farmId: Number) => {
+  getByFarmId: async (farmId: String) => {
     return await Pig.find({ farmId }).exec();
   },
 
   // Create a new user
-  create: async ({ name, img, birthDate, breed, description, farmId }) => {
+  create: async ({ name, img, dob, breed, description, farmId }) => {
     const pig = new Pig({
       name,
-      img,
-      birthDate,
       breed,
       description,
-      farmId
+      farmId,
+      birthDate: dob,
+      img: img || '',
     });
 
     await pig.save();
