@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-import * as dotenv from 'dotenv';
+// import * as dotenv from 'dotenv';
 
 let MONGODB_URI = '';
 
 // Load the URI from Heroku if theres one in the environment
-if (process.env.MONGODB_URI) {
+if (import.meta.env.MONGODB_URI) {
   MONGODB_URI = process.env.MONGODB_URI;
 
 // otherwise build the URI
