@@ -59,26 +59,9 @@ export const get = async (req, res) => {
   }
 }
 
-// export const post = async (req, res) => {
-//   let pigResponse = pigs;
-
-//   if (req.body !== undefined && req.body.farmId !== undefined) {
-//     pigResponse = pigResponse.filter((pig) => {
-//       return pig.farmId == req.body.farmId;
-//     });
-//   }
-
-//   return {
-//     status: 200,
-//     body: {
-//       pigs: pigResponse,
-//     }
-//   }
-// }
-
 export const post = async (req, res) => {
   // Verify the user is logged in otherwise move on
-	if (await userNeedsToLogin({
+  if (await userNeedsToLogin({
     // We have to kind of jankily pass the path we're on here. Not sure if there's
     // a more dynamic way to do this right now
     page: { path: '/pigs/getpigs' },
@@ -97,8 +80,6 @@ export const post = async (req, res) => {
 
   if (req.body !== undefined && req.body.farmId !== undefined) {
     const pigs = await Pig.getByFarmId(req.body.farmId);
-
-    console.log('pigs');
 
     return {
       status: 200,

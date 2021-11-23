@@ -32,7 +32,7 @@
 			const body = await res.json();
       console.log(body);
 
-			// goto('/');
+			await goto(`/farms/${$page.params.id}`);
 		} else {
 			const body = await res.json();
       console.log('ERROR!');
