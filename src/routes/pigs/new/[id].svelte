@@ -6,10 +6,21 @@
 	let description: string;
 	let breed: string;
 	let dob: Date;
+	let image: File;
 	let errorMessage = '';
+
+  const toBase64 = file => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
 
 	async function registerPig(e) {
     e.preventDefault();
+
+    const imageEl = document.querySelector('#image');
+    const imageString = await toBase64(imageEl.files[0])
 
 		console.log(`Pig added ${name} ${description} ${breed} ${dob} ${$page.params.id}`);
 		const res = await fetch(
@@ -22,6 +33,7 @@
 					breed,
 					dob,
           farmId: $page.params.id,
+          image: imageString,
 				}),
 			},
 		);
@@ -71,6 +83,10 @@
 		<div class="form-group">
 			<label for="dob"> Aproximate Date of Birth</label>
 			<input bind:value={dob} type="date" class="form-control" name="dob" id="dob"/><br />
+		</div>
+		<div class="form-group">
+			<label for="image">Image</label>
+			<input bind:value={image} type="file" class="form-control" name="image" id="image"/><br>
 		</div>
 		<button type="submit" class="btn btn-primary" on:click="{registerPig}">Add Pig to Farm</button>
 	</form>

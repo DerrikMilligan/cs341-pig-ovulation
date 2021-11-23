@@ -44,7 +44,7 @@ export default {
       description,
       farmId,
       birthDate: dob,
-      img: img || '',
+      img: img || 'https://via.placeholder.com/300?text=Pig',
     });
 
     await pig.save();
