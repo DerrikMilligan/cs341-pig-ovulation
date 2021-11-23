@@ -8,6 +8,8 @@ console.log('ENV VARIABLES');
 console.log('------------------------------------------------');
 console.log(import.meta.env);
 console.log('------------------------------------------------');
+console.log(process.env);
+console.log('------------------------------------------------');
 
 // Load the URI from Heroku if theres one in the environment
 if (import.meta.env.MONGODB_URI) {
