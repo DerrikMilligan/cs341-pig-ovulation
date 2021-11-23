@@ -3,14 +3,7 @@ import * as dotenv from 'dotenv';
 
 let MONGODB_URI = '';
 
-console.log('------------------------------------------------');
-console.log('ENV VARIABLES');
-console.log('------------------------------------------------');
-console.log(process.env);
-console.log('------------------------------------------------');
-
 // Load the URI from Heroku if theres one in the environment
-// if (import.meta.env.MONGODB_URI) {
 if (process.env['MONGODB_URI']) {
   MONGODB_URI = process.env['MONGODB_URI'];
 
@@ -18,9 +11,9 @@ if (process.env['MONGODB_URI']) {
 } else {
   // Make sure that our .env file has been loaded
   const envResult = dotenv.config();
-  // if (envResult.error) {
-  //   throw envResult.error;
-  // }
+  if (envResult.error) {
+    throw envResult.error;
+  }
 
   // For some reason when trying to access env variables with process.env.MONGO_USERNAME it doesn't work...
   // We can access them with keys... Like process.env['MONGO_USERNAME'] but that's pretty ugly...

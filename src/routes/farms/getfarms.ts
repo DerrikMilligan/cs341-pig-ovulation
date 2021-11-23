@@ -18,6 +18,10 @@ export const get = async (req, res) => {
     };
   }
 
+  console.log('-------------------------------------------');
+  console.log(req.locals.user);
+  console.log(await Farm.getByUser(req.locals.user));
+
   return {
     status: 200,
     body: {

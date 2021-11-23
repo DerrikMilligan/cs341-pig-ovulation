@@ -23,7 +23,8 @@ export default {
     if (!mongoose.Types.ObjectId.isValid(user._id)) {
       return null;
     }
-    return await Farm.find({ users: user._id });
+
+    return await Farm.find({ 'users._id': user._id }).exec();
   },
 
   // Create a new farm

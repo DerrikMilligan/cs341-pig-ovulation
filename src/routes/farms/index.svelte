@@ -12,11 +12,11 @@
 
 <script lang="ts">
 type Farm = {
-    uid: string;
-		name: string;
-	};
+  uid: string;
+  name: string;
+};
 
-  export let farms: Farm[];
+export let farms: Farm[];
 </script>
 
 <svelte:head>
