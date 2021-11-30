@@ -1,3 +1,28 @@
+<script context="module">
+	export async function load({ page, fetch }) {
+		const _id = page.params.id;
+		const res = await fetch('/pigs/getpig', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        pigId: _id,
+      }, null, 2),
+    });
+		if (res.ok) {
+      const body = await res.json();
+
+      console.log(body);
+
+      return {
+        props: { pig: body.pig, },
+      };
+    }
+	}
+</script>
+
 <script lang="ts">
   import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
@@ -16,7 +41,7 @@
     reader.onerror = error => reject(error);
   });
 
-	async function registerPig(e) {
+	async function editPig(e) {
     e.preventDefault();
 
     const imageEl = document.querySelector('#image');
@@ -24,15 +49,15 @@
 
 		console.log(`Pig added ${name} ${description} ${breed} ${dob} ${$page.params.id}`);
 		const res = await fetch(
-			'/pigs/addPig',
+			'/pigs/editPig',
 			{
 				method: 'POST',
 				body: JSON.stringify({
+					_id: $page.params.id,
 					name,
 					description,
 					breed,
 					dob,
-          farmId: $page.params.id,
           image: imageString,
 				}),
 			},
@@ -55,10 +80,10 @@
 </script>
 
 <svelte:head>
-	<title>Register Pig</title>
+	<title>Edit Pig</title>
 </svelte:head>
 
-<h1>Add New Pig</h1>
+<h1>Edit Pig</h1>
 
 <section>
 	<form>
@@ -90,6 +115,6 @@
 			<label for="image">Image</label>
 			<input bind:value={image} type="file" class="form-control" name="image" id="image"/><br>
 		</div>
-		<button type="submit" class="btn btn-primary" on:click="{registerPig}">Add Pig to Farm</button>
+		<button type="submit" class="btn btn-primary" on:click="{editPig}">Edit Pig</button>
 	</form>
 </section>

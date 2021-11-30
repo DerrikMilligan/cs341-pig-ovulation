@@ -1,6 +1,10 @@
 <script lang="ts">
   import type { Pig } from '$lib/types';
   export let pigs: Pig[];
+
+  async function deletePig() {
+    
+  }
 </script>
 
 <ul class="d-flex flex-wrap justify-content-evenly ps-0">
@@ -14,6 +18,8 @@
             <img class="rounded-1 w-100" src="{ pig.img }" alt="Photo of { pig.name }">
             <h2 class="h4 py-1">{pig.name}</h2>
             <p>{pig.description}</p>
+            <a class="btn btn-primary btn-sm p-1 mx-auto my-3" href="/pigs/edit/{ pig._id }">Edit</a>
+            <button class="btn btn-primary btn-sm p-1 mx-auto my-3" on:click="{deletePig}">Delete</button>
           </div>
         </a>
       </li>

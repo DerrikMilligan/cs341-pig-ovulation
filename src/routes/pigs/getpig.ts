@@ -54,7 +54,7 @@ export const get = async (req, res) => {
   return {
     status: 200,
     body: {
-      pigs: await Pig.getByFarmId(req.body.farmId),
+      pig: await Pig.getById(req.body.pigId),
     }
   }
 }
@@ -64,7 +64,7 @@ export const post = async (req, res) => {
   if (await userNeedsToLogin({
     // We have to kind of jankily pass the path we're on here. Not sure if there's
     // a more dynamic way to do this right now
-    page: { path: '/pigs/getpigs' },
+    page: { path: '/pigs/getpig' },
     session: req.locals
   })) {
     // Here we re-direct to the login page if the user isn't authorized
@@ -78,13 +78,14 @@ export const post = async (req, res) => {
 
   await connectToDatabase();
 
-  if (req.body !== undefined && req.body.farmId !== undefined) {
-    const pigs = await Pig.getByFarmId(req.body.farmId);
+  if (req.body !== undefined && req.body.pigId !== undefined) {
+    const pig = await Pig.getById(req.body.pigId);
 
+    console.log(pig);
     return {
       status: 200,
       body: {
-        pigs
+        pig
       }
     }
   };
