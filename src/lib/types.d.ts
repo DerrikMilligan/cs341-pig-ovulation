@@ -4,7 +4,7 @@
  */
 
 export type Pig = {
-	uid: string;
+	_id: string;
 	name: string;
 	img: string;
 	birthDate: Date;
@@ -14,7 +14,7 @@ export type Pig = {
 };
 
 export type Farm = {
-	uid: string;
+	_id: string;
 	name: string;
 	users: [];
 };

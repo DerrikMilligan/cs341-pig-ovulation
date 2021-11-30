@@ -52,6 +52,18 @@ export default {
     return pig;
   },
 
+  edit: async ({ _id, name, img, dob, breed, description}) => {
+    const pig = await Pig.findByIdAndUpdate({_id},{
+      name,
+      breed,
+      description,
+      birthDate: dob,
+      img: img || 'https://via.placeholder.com/300?text=Pig'
+    });
+    
+    return pig;
+  },
+
   createSnapshot: async (pig, { img, isSwelling, presumedPregnant, notes, timestamp }) => {
     if (!mongoose.Types.ObjectId.isValid(pig._id)) {
       return null;
