@@ -1,5 +1,22 @@
+<script context="module">
+import { userNeedsToLogin } from '$lib/guards';
+
+export async function load({ page, session }) {
+  const loggedIn = session !== null && session.user !== null && session.user !== undefined;
+  
+  if (loggedIn) {
+    return {
+      status: 302,
+      redirect: '/farms'
+    };
+  }
+
+  return {};
+}
+</script>
+
 <svelte:head>
-	<title>Track My Farm</title>
+  <title>Track My Farm</title>
 </svelte:head>
 
 <main class="px-3">

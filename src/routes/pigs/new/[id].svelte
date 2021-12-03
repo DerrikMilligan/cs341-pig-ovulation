@@ -6,20 +6,22 @@
 	let description: string;
 	let breed: string;
 	let dob: Date;
-	let image: File;
+	// let image: File;
 	let errorMessage = '';
 
-  const toBase64 = file => new Promise((resolve, reject) => {
+	// Simple file to base64 string reader
+  const toBase64 = (file: File): Promise<string> => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
+    reader.onload = () => resolve(reader.result.toString());
     reader.onerror = error => reject(error);
   });
 
-	async function registerPig(e) {
+	async function registerPig(e: MouseEvent) {
+		// Make sure we don't submit the form with HTML. We want to manually submit it
     e.preventDefault();
 
-    const imageEl = document.querySelector('#image');
+    const imageEl = document.querySelector('#image') as HTMLInputElement;
     const imageString = await toBase64(imageEl.files[0]);
 
 		console.log(`Pig added ${name} ${description} ${breed} ${dob} ${$page.params.id}`);
@@ -38,7 +40,7 @@
 			},
 		);
 
-    console.log(res);
+    // console.log(res);
 
 		if (res.ok) {
 			const body = await res.json();
@@ -88,8 +90,13 @@
 		</div>
 		<div class="form-group">
 			<label for="image">Image</label>
-			<input bind:value={image} type="file" class="form-control" name="image" id="image"/><br>
+			<input type="file" class="form-control" name="image" id="image"/><br>
 		</div>
 		<button type="submit" class="btn btn-primary" on:click="{registerPig}">Add Pig to Farm</button>
+		{#if errorMessage}
+		<div>
+			{errorMessage}
+		</div>
+		{/if}
 	</form>
 </section>
