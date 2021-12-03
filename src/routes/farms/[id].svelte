@@ -13,15 +13,18 @@
 			}, null, 2)
 		});
 
+		let props = {
+			pigs: [],
+			users: [],
+		};
+
 
 		if (res.ok) {
 			const body = await res.json();
 
 			console.log(body);
 
-			return {
-				props: { pigs: body.pigs }
-			};
+			props.pigs = body.pigs;
 		}
 
 		const userRes = await fetch('/farms/getFarm', {
@@ -38,14 +41,11 @@
 
 			console.log("FarmUser Request: ", body);
 
-			return {
-				props: { users: body.farms.users }
-			};
+			props.users = body.farms.users;
 		}
 
+		return { props };
 	};
-
-
 </script>
 
 <script lang='ts'>
