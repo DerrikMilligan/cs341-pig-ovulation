@@ -16,7 +16,7 @@
     if (res.ok) {
       const body = await res.json();
 
-      console.log(body);
+      // console.log(body);
 
       return {
         props: { pigs: body.pigs, },

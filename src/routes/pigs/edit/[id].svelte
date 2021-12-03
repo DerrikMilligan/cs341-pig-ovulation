@@ -14,7 +14,7 @@
 		if (res.ok) {
       const body = await res.json();
 
-      console.log(body);
+    //   console.log(body);
 
       return {
         props: { pig: body.pig, },
@@ -63,11 +63,11 @@
 			},
 		);
 
-    console.log(res);
+    // console.log(res);
 
 		if (res.ok) {
 			const body = await res.json();
-      console.log(body);
+    //   console.log(body);
 
 			await goto(`/farms/${$page.params.id}`);
 		} else {
