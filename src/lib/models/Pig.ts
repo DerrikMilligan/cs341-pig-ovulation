@@ -64,6 +64,17 @@ export default {
     return pig;
   },
 
+  del: async ({ _id }) => {
+    const pig = await Pig.findById(_id);
+    if (!pig) {
+      throw new Error('No pig was found.')
+    }
+    const removed = await pig.remove()
+    //const pig = await Pig.deleteOne(_id);
+    
+    return removed;
+  },
+
   createSnapshot: async (pig, { img, isSwelling, presumedPregnant, notes, timestamp }) => {
     if (!mongoose.Types.ObjectId.isValid(pig._id)) {
       return null;

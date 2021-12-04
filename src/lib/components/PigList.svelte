@@ -1,10 +1,10 @@
 <script lang="ts">
   import type { Pig } from '$lib/types';
+  //import { showModal } from '$lib/routes/farms/[id].svelte';
   export let pigs: Pig[];
 
-  async function deletePig() {
-    
-  }
+  export let showModal = false;
+  export let pigId;
 </script>
 
 <ul class="d-flex flex-wrap justify-content-evenly ps-0">
@@ -19,7 +19,7 @@
             <h2 class="h4 py-1">{pig.name}</h2>
             <p>{pig.description}</p>
             <a class="btn btn-primary btn-sm p-1 mx-auto my-3" href="/pigs/edit/{ pig._id }">Edit</a>
-            <button class="btn btn-primary btn-sm p-1 mx-auto my-3" on:click="{deletePig}">Delete</button>
+            <button class="btn btn-primary btn-sm p-1 mx-auto my-3" on:click={(e) => {e.preventDefault(); showModal = true; pigId=pig._id}}>Delete</button>
           </div>
         </a>
       </li>
