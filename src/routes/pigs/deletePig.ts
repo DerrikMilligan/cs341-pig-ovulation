@@ -22,10 +22,13 @@ export const post = async (req) => {
 
   console.log(JSON.parse(req.body));
 
-  //const pig = await Pig.del(JSON.parse(req.body));
-  
+  const response = await Pig.del(JSON.parse(req.body));
+
   return {
     status: 200,
+    body: {
+      success: response.acknowledged,
+    }
   };
 
 }

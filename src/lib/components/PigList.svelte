@@ -1,10 +1,16 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
+
   import type { Pig } from '$lib/types';
   //import { showModal } from '$lib/routes/farms/[id].svelte';
   export let pigs: Pig[];
 
-  export let showModal = false;
-  export let pigId;
+  function deleteClicked(e: MouseEvent, pigId: string) {
+    e.preventDefault();
+    dispatch('deleteClicked', { pigId });
+  }
 </script>
 
 <ul class="d-flex flex-wrap justify-content-evenly ps-0">
@@ -19,7 +25,7 @@
             <h2 class="h4 py-1">{pig.name}</h2>
             <p>{pig.description}</p>
             <a class="btn btn-primary btn-sm p-1 mx-auto my-3" href="/pigs/edit/{ pig._id }">Edit</a>
-            <button class="btn btn-primary btn-sm p-1 mx-auto my-3" on:click={(e) => {e.preventDefault(); showModal = true; pigId=pig._id}}>Delete</button>
+            <button class="btn btn-primary btn-sm p-1 mx-auto my-3" on:click={(e) => {deleteClicked(e, pig._id)}}>Delete</button>
           </div>
         </a>
       </li>

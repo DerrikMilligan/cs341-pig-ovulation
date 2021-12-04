@@ -69,10 +69,8 @@ export default {
     if (!pig) {
       throw new Error('No pig was found.')
     }
-    const removed = await pig.remove()
-    //const pig = await Pig.deleteOne(_id);
-    
-    return removed;
+
+    return await Pig.deleteOne({ _id }).exec();
   },
 
   createSnapshot: async (pig, { img, isSwelling, presumedPregnant, notes, timestamp }) => {

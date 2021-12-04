@@ -18,8 +18,6 @@
     if (res.ok) {
       const body = await res.json();
 
-      console.log(body);
-
       return {
         props: { pigs: body.pigs, },
       };
@@ -31,8 +29,10 @@
 
 <script lang="ts">
   import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
+  import { goto } from '$app/navigation';
+
   import type { Pig } from '$lib/types';
+
   import PigList from '$lib/components/PigList.svelte';
   import Modal from '$lib/components/Modal.svelte';
 
@@ -40,30 +40,37 @@
   let show = false;
   let pigId;
   let errorMessage = '';
+
+  function showModal(event) {
+    console.log(`delete modal for pig: ${event.detail.pigId}`);
+    pigId = event.detail.pigId;
+    show = true;
+  }
   
   async function deletePig(pigId) {
     const res = await fetch(
-			'/pigs/deletePig',
-			{
-				method: 'POST',
-				body: JSON.stringify({
-					_id: pigId
-				}),
-			},
-		);
+      '/pigs/deletePig',
+      {
+	method: 'POST',
+	body: JSON.stringify({
+	  _id: pigId
+	}),
+      },
+    );
 
     console.log(res);
 
-		if (res.ok) {
-			// const body = await res.json();
-      // console.log(body);
+    show = false;
 
-			await goto(`/farms/${$page.params.id}`);
-		} else {
-			const body = await res.json();
+    if (res.ok) {
+      const body = await res.json();
+      console.log(body);
+      pigs = pigs.filter((pig) => pig._id !== pigId);
+    } else {
+      const body = await res.json();
       console.log('ERROR!');
-			errorMessage = body.message;
-		}
+      errorMessage = body.message;
+    }
   }
 </script>
 
@@ -75,7 +82,7 @@
 
 <a class="btn btn-primary btn-sm p-1 mx-auto my-3" href="/pigs/new/{$page.params.id}">Add New Pig</a>
 
-<PigList {pigs} bind:showModal={show} bind:pigId = {pigId}/>
+<PigList {pigs} on:deleteClicked={showModal}/>
 
 {#if show}
   <Modal>
@@ -83,7 +90,7 @@
     <div slot="content" class="pt-4">
       <p>Are you sure you would like to delete you pig?</p>
       <button class="btn btn-primary btn-sm p-1" on:click={(e) => {e.preventDefault(); show = false;}}>Cancel</button>
-      <button class="btn btn-primary btn-sm p-1" on:click="{() => deletePig(pigId)}">Delete Pig</button>
+      <button class="btn btn-primary btn-sm p-1" on:click={() => deletePig(pigId)}>Delete Pig</button>
     </div>
   </Modal>
 {/if}
