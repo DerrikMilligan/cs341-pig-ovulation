@@ -32,7 +32,7 @@
 					<input type='email' bind:value={email} class='form-control'>
 				</div>
 				<div class='col-auto'>
-					<button class='btn btn-primary' href='/farms/addFarmUser/{email}'>Add User</button>
+					<button class='btn btn-primary btn-sm' href='/farms/addFarmUser/{email}'>Add User by Email</button>
 				</div>
 
 			</div>
