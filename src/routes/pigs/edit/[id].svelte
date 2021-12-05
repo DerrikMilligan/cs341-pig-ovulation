@@ -31,23 +31,23 @@
 	let description: string;
 	let breed: string;
 	let dob: Date;
-	let image: File;
+	//let image: File;
 	let errorMessage = '';
 
-  const toBase64 = file => new Promise((resolve, reject) => {
+	// Simple file to base64 string reader
+  const toBase64 = (file: File): Promise<string> => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
+    reader.onload = () => resolve(reader.result.toString());
     reader.onerror = error => reject(error);
   });
 
 	async function editPig(e) {
     e.preventDefault();
 
-    const imageEl = document.querySelector('#image');
+    const imageEl = document.querySelector('#image') as HTMLInputElement;
     const imageString = await toBase64(imageEl.files[0]);
 
-		console.log(`Pig added ${name} ${description} ${breed} ${dob} ${$page.params.id}`);
 		const res = await fetch(
 			'/pigs/editPig',
 			{
@@ -69,7 +69,7 @@
 			const body = await res.json();
       console.log(body);
 
-			await goto(`/farms/${$page.params.id}`);
+			await goto(`/pigs/${$page.params.id}`);
 		} else {
 			const body = await res.json();
       console.log('ERROR!');
@@ -113,7 +113,7 @@
 		</div>
 		<div class="form-group">
 			<label for="image">Image</label>
-			<input bind:value={image} type="file" class="form-control" name="image" id="image"/><br>
+			<input type="file" class="form-control" name="image" id="image"/><br>
 		</div>
 		<button type="submit" class="btn btn-primary" on:click="{editPig}">Edit Pig</button>
 	</form>
