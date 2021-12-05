@@ -22,12 +22,10 @@
 		if (res.ok) {
 			const body = await res.json();
 
-			console.log(body);
-
 			props.pigs = body.pigs;
 		}
 
-		const userRes = await fetch('/farms/getFarm', {
+		const userRes = await fetch('/farms/getfarm', {
 			method: 'post',
 			headers: {
 				'Accept': 'application/json',
@@ -39,9 +37,7 @@
 		});
 
 		if (userRes.ok) {
-			const body = await res.json();
-
-			console.log("FarmUser Request: ", body);
+			const body = await userRes.json();
 
 			props.users = body.farms.users;
 		}
@@ -71,7 +67,7 @@
 
 <PigList {pigs} />
 
-<!--<UserList {users} />-->
+<UserList {users} />
 
 <style>
     a {

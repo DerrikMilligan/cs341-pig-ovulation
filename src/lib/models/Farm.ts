@@ -16,7 +16,9 @@ export default {
 
 	// Method to retreive a Farm by their id
 	getByID: async (id: Number) => {
-		return await Farm.findById(id).populate('users').exec();
+		return await Farm.findById(id)
+			.populate('users')
+			.exec();
 	},
 
 	getByUser: async (user) => {
@@ -24,7 +26,7 @@ export default {
 			return null;
 		}
 
-		return await Farm.find({ 'users._id': user._id }).exec();
+		return await Farm.find({ 'users._id': user._id }).populate('users').exec();
 	},
 
 	// Create a new farm
