@@ -30,10 +30,12 @@
 		const userRes = await fetch('/farms/getFarm', {
 			method: 'post',
 			headers: {
-				body: JSON.stringify({
-					farmId: _id
-				}, null, 2)
-			}
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				farmId: _id
+			}, null, 2)
 		});
 
 		if (userRes.ok) {
