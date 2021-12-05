@@ -92,6 +92,7 @@
 			errorMessage = body.message;
 		}
 	}
+
 </script>
 
 <svelte:head>
@@ -103,6 +104,7 @@
 <a class='btn btn-primary btn-sm p-1 mx-auto my-3' href='/pigs/new/{$page.params.id}'>Add New Pig</a>
 
 <PigList {pigs} on:deleteClicked={showModal}/>
+
 
 {#if show}
 	<Modal>
@@ -116,6 +118,7 @@
 {/if}
 
 <UserList {users} />
+
 
 <style>
     a {

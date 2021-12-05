@@ -1,57 +1,60 @@
 <script lang="ts">
   import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
+  import { goto } from '$app/navigation';
 
-	let name: string;
-	let description: string;
-	let breed: string;
-	let dob: Date;
-	let image: File;
-	let errorMessage = '';
+  let name: string;
+  let description: string;
+  let breed: string;
+  let dob: Date;
+  // let image: File;
+  let errorMessage = '';
 
-  const toBase64 = file => new Promise((resolve, reject) => {
+  // Simple file to base64 string reader
+  const toBase64 = (file: File): Promise<string> => new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result);
+    reader.onload = () => resolve(reader.result.toString());
     reader.onerror = error => reject(error);
   });
 
-	async function registerPig(e) {
+  async function registerPig(e: MouseEvent) {
+    // Make sure we don't submit the form with HTML. We want to manually submit it
     e.preventDefault();
 
-    const imageEl = document.querySelector('#image');
-    const imageString = await toBase64(imageEl.files[0]);
+    const imageEl = document.querySelector('#image') as HTMLInputElement;
+    const imageString = imageEl.files.length > 0
+      ? await toBase64(imageEl.files[0])
+      : '';
 
-		console.log(`Pig added ${name} ${description} ${breed} ${dob} ${$page.params.id}`);
-		const res = await fetch(
-			'/pigs/addPig',
-			{
-				method: 'POST',
-				body: JSON.stringify({
-					name,
-					description,
-					breed,
-					dob,
-          farmId: $page.params.id,
-          image: imageString,
-				}),
-			},
-		);
+    console.log(`Pig added ${name} ${description} ${breed} ${dob} ${$page.params.id}`);
+    const res = await fetch(
+      '/pigs/addPig',
+      {
+	method: 'POST',
+	body: JSON.stringify({
+	  name,
+	  description,
+	  breed,
+	  dob,
+	  farmId: $page.params.id,
+	  image: imageString,
+	}),
+      },
+    );
 
-    console.log(res);
+    // console.log(res);
 
-		if (res.ok) {
-			const body = await res.json();
+    if (res.ok) {
+      const body = await res.json();
       console.log(body);
 
-			await goto(`/farms/${$page.params.id}`);
-		} else {
-			const body = await res.json();
+      await goto(`/farms/${$page.params.id}`);
+    } else {
+      const body = await res.json();
       console.log('ERROR!');
-			errorMessage = body.message;
-		}
-	}
-
+      errorMessage = body.message;
+    }
+  }
 </script>
 
 <svelte:head>
@@ -88,8 +91,13 @@
 		</div>
 		<div class="form-group">
 			<label for="image">Image</label>
-			<input bind:value={image} type="file" class="form-control" name="image" id="image"/><br>
+			<input type="file" class="form-control" name="image" id="image"/><br>
 		</div>
 		<button type="submit" class="btn btn-primary" on:click="{registerPig}">Add Pig to Farm</button>
+		{#if errorMessage}
+		<div>
+			{errorMessage}
+		</div>
+		{/if}
 	</form>
 </section>

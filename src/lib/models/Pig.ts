@@ -37,14 +37,14 @@ export default {
   },
 
   // Create a new user
-  create: async ({ name, img, dob, breed, description, farmId }) => {
+  create: async ({ name, image, dob, breed, description, farmId }) => {
     const pig = new Pig({
       name,
       breed,
       description,
       farmId,
       birthDate: dob,
-      img: img || 'https://via.placeholder.com/300?text=Pig',
+      img: image || 'https://via.placeholder.com/300?text=Pig',
     });
 
     await pig.save();
@@ -62,6 +62,15 @@ export default {
     });
     
     return pig;
+  },
+
+  del: async ({ _id }) => {
+    const pig = await Pig.findById(_id);
+    if (!pig) {
+      throw new Error('No pig was found.')
+    }
+
+    return await Pig.deleteOne({ _id }).exec();
   },
 
   createSnapshot: async (pig, { img, isSwelling, presumedPregnant, notes, timestamp }) => {
