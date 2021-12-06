@@ -58,15 +58,16 @@
 			{/if}
 		</ul>
 	</div>
-	<div class='row'>
-		<div class='row g-3 align-items-center'>
-			<div class='col-auto'>
-				<input type='email' bind:value={email} class='form-control'>
-			</div>
-			<div class='col-auto'>
-				<button class='btn btn-primary btn-sm' on:click={() => addFarmUser(farmId, email)}>Add User by Email</button>
-			</div>
+	<div class='row g-3 align-items-center'>
+		<div class='col-auto'>
+			<input type='email' bind:value={email} class='form-control'>
 		</div>
+		<div class='col-auto'>
+			<button class='btn btn-primary btn-sm' href='/farms/addFarmUser/{email}'>Add User by Email</button>
+		</div>
+	</div>
+	<div class='col-auto'>
+		<button class='btn btn-primary btn-sm' on:click={() => addFarmUser(farmId, email)}>Add User by Email</button>
 	</div>
 </section>
 
@@ -84,7 +85,7 @@
         list-style: none;
     }
 
-		.remove-user:hover {
-				color: red;
-		}
+    .remove-user:hover {
+        color: red;
+    }
 </style>
