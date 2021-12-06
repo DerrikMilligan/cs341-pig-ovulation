@@ -27,25 +27,29 @@
 		}
 	}
 </script>
-<!-- <script lang="ts">
-import { Pig } from '$lib/models';
+<script lang="ts">
+// import { Pig } from '$lib/models';
 
     import type { Pig } from '$lib/types';
     
     export let pig: Pig[];
-    export let today = Date.now();
     
-    console.log(today);
     
-    </script> -->
+    
+    
+    </script>
 
 
 
 <svelte:head>
 	<title>{pig.name}</title>
 </svelte:head>
-
+<!-- 
 <img class="rounded" src="/spotFace_25.jpg" alt="{Pig.name}" />
+<h1>{pig.name}</h1>
+<p>Dob:{pig.birthDate}</p> -->
+
+<img class="rounded" src="{pig.img}" alt="{pig.name}" />
 <h1>{pig.name}</h1>
 <p>Dob:{pig.birthDate}</p>
 <p>Age: 12 months</p>
