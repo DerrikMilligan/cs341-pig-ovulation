@@ -42,12 +42,28 @@ export default {
 		return farm;
 	},
 
-	addUser: async (farm, user) => {
+	addUser: async (farmId, user) => {
+		// if (!mongoose.Types.ObjectId.isValid(farmId) || !mongoose.Types.ObjectId.isValid(user._id)) {
+		// 	return null;
+		// }
+
+		const farm = await Farm.findByIdAndUpdate({_id: farmId}, {
+			$push: { users: user }
+		})
+
+		// farm.users.push(user);
+
+		await farm.save();
+
+		return farm;
+	},
+
+	removeUser: async (farm, user) => {
 		if (!mongoose.Types.ObjectId.isValid(farm._id) || !mongoose.Types.ObjectId.isValid(user._id)) {
 			return null;
 		}
 
-		farm.users.push(user._id);
+		farm.users.pull(user);
 
 		await farm.save();
 
