@@ -117,7 +117,7 @@
 	</Modal>
 {/if}
 
-<UserList {users} />
+<UserList {users} farmId={$page.params.id}/>
 
 
 <style>
