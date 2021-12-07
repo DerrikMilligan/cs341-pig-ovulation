@@ -1,12 +1,12 @@
-import { Farm } from '$lib/models';
+import { connectToDatabase, Pig } from '$lib/models';
 import { userNeedsToLogin } from '$lib/guards';
 
-export const get = async (req, res) => {
+export const post = async (req) => {
   // Verify the user is logged in otherwise move on
-	if (await userNeedsToLogin({
+  if (await userNeedsToLogin({
     // We have to kind of jankily pass the path we're on here. Not sure if there's
     // a more dynamic way to do this right now
-    page: { path: '/farms/getfarms' },
+    page: { path: '/pigs/deletePig' },
     session: req.locals
   })) {
     // Here we re-direct to the login page if the user isn't authorized
@@ -18,12 +18,20 @@ export const get = async (req, res) => {
     };
   }
 
+  await connectToDatabase();
+
+  console.log(JSON.parse(req.body));
+
+  const response = await Pig.del(JSON.parse(req.body));
+
   return {
     status: 200,
     body: {
-      farms: await Farm.getByUser(req.locals.user),
-    },
+      success: response.acknowledged,
+    }
   };
 
 }
+
+
 

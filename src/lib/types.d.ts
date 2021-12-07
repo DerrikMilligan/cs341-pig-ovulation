@@ -28,3 +28,10 @@ export type PigSnapshot = {
 	pig: { type: mongoose.Schema.Types.ObjectId, ref: 'Pig' },
 	timestamp: Date,
 }
+
+export type User = {
+	email:         string,
+	password:      string,
+	isFarmOwner:   boolean,
+	sessionId:     string,
+}
