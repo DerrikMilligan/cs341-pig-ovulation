@@ -58,12 +58,16 @@ export default {
 		return farm;
 	},
 
-	removeUser: async (farm, user) => {
-		if (!mongoose.Types.ObjectId.isValid(farm._id) || !mongoose.Types.ObjectId.isValid(user._id)) {
-			return null;
-		}
+	removeUser: async (farmId, user) => {
+		// if (!mongoose.Types.ObjectId.isValid(farm._id) || !mongoose.Types.ObjectId.isValid(user._id)) {
+		// 	return null;
+		// }
 
-		farm.users.pull(user);
+		// farm.users.pull(user);
+
+		const farm = await Farm.findByIdAndUpdate({_id: farmId}, {
+			$pull: { users: user }
+		})
 
 		await farm.save();
 
