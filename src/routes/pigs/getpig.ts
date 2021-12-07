@@ -81,7 +81,7 @@ export const post = async (req, res) => {
   if (req.body !== undefined && req.body.pigId !== undefined) {
     const pig = await Pig.getById(req.body.pigId);
 
-    console.log(pig);
+    // console.log(pig);
     return {
       status: 200,
       body: {

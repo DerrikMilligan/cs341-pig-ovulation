@@ -19,6 +19,16 @@ export type Farm = {
 	users: [];
 };
 
+export type PigSnapshot = {
+	_id: String,
+	img: String,
+	isSwelling: Boolean,
+	presumedPregnant: Boolean,
+	notes: String,
+	pig: { type: mongoose.Schema.Types.ObjectId, ref: 'Pig' },
+	timestamp: Date,
+}
+
 export type User = {
 	email:         string,
 	password:      string,

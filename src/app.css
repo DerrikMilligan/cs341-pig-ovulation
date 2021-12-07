@@ -14,4 +14,12 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
-
+.pigButtImg{
+  max-width: 25vw;
+  
+}
+.pigButtContainer{
+  max-width: 100vw;
+  display: flex;
+  justify-content: space-around;
+}

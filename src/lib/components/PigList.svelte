@@ -26,6 +26,7 @@
             <p>{pig.description}</p>
             <a class="btn btn-primary btn-sm p-1 mx-auto my-3" href="/pigs/edit/{ pig._id }">Edit</a>
             <button class="btn btn-primary btn-sm p-1 mx-auto my-3" on:click={(e) => {deleteClicked(e, pig._id)}}>Delete</button>
+            <a class="btn btn-primary btn-sm p-1 mx-auto my-3" href="/pigs/addSnapshot/{ pig._id }">Add Snapshot</a>
           </div>
         </a>
       </li>
