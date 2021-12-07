@@ -49,6 +49,8 @@
    
   async function addPigSnapshot(e: MouseEvent) {
 		e.preventDefault();
+		console.log("adding snapshot");
+		
 
     const imageEl = document.querySelector('#image') as HTMLInputElement;
     const imageString = imageEl.files.length > 0
@@ -73,7 +75,7 @@
 
 		if (result.ok) {
 				const data = await result.json();
-				console.log(data);
+				console.log("data");
 		}
   }
     
@@ -81,10 +83,10 @@
 </script>
 
 <svelte:head>
-	<title>{pig.name} {yearFirst}</title>
+	<title>{pig.name} {date}</title>
 </svelte:head>
 
-<h1> { dateFormatted }</h1>
+<h1> { date }</h1>
 
 <form>
     
