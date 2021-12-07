@@ -47,11 +47,31 @@
 
 	export let pig: Pig;
 	export let snapshots: PigSnapshot[] = [];
-	export let today = Date.now();
+	 let today =  Date.now();
+	 let newtoday = new Date(today);
+	 console.log(newtoday);
+	 let birthDate = new Date(pig.birthDate)
+	 let birthYear = birthDate.getFullYear();
+	//  console.log(birthYear);
+	let birthMonth = birthDate.getMonth()+1;
+	let birthday = birthDate.getDate();
+	let birthDateFormat = `${birthMonth}/${birthday}/${birthYear}`
+	 
+	 let birthTime =birthDate.getTime()
+	 console.log(`birthtime is ${birthTime}`);
+	 
+	 console.log(pig.birthDate);
+	 console.log(birthDate);
+	 let months = new Date(today - birthTime).getMonth() % 12;
+	 console.log(months);
+	 
+	 let years = new Date(today - birthTime).getFullYear()-1970;
+	 console.log(years);
+	 
+	 
 
-	// console.log(typeof snapshots[0].timestamp);
-
-	// console.log(today);
+	
+	
 </script>
 
 <svelte:head>
@@ -67,8 +87,8 @@
 	/>
 </div>
 <h1>{pig.name}</h1>
-<p>Dob:{pig.birthDate}</p>
-<p>Age: 12 months</p>
+<p>Dob:{birthDateFormat}</p>
+<p>Age: {years} years, {months} months</p>
 <p>Presumed pregnant: Yes</p>
 <p>Date of last observed swelling:</p>
 <div class="row">

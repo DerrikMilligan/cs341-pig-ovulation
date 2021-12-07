@@ -77,6 +77,8 @@ export default {
     if (!mongoose.Types.ObjectId.isValid(pig._id)) {
       return null;
     }
+    //add timezone offset so date is correct.
+
     let offset = new Date().getTimezoneOffset()/60;
     // console.log(`offset is ${offset}`);
     
