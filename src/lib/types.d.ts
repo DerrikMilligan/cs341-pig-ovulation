@@ -18,3 +18,13 @@ export type Farm = {
 	name: string;
 	users: [];
 };
+
+export type PigSnapshot = {
+	_id: String,
+	img: String,
+	isSwelling: Boolean,
+	presumedPregnant: Boolean,
+	notes: String,
+	pig: { type: mongoose.Schema.Types.ObjectId, ref: 'Pig' },
+	timestamp: Date,
+}
