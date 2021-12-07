@@ -32,7 +32,7 @@ export let farms: Farm[];
   {/if}
 </ul>
 
-<a href='/farms/new' class='btn btn-primary'>Add New Farm</a>
+<a href='/farms/new' class='btn btn-primary btn-sm p-1 mx-auto my-3'>Add New Farm</a>
 
 <style>
 

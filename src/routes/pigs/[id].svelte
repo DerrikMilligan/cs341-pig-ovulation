@@ -67,11 +67,6 @@
 	 
 	 let years = new Date(today - birthTime).getFullYear()-1970;
 	 console.log(years);
-	 
-	 
-
-	
-	
 </script>
 
 <svelte:head>
@@ -83,10 +78,10 @@
 		class="rounded"
 		src={pig.img}
 		alt={pig.name}
-		style="max-height: 400px; object-fit: contain;"
+		style="max-height: 400px; max-width: 100%; object-fit: contain;"
 	/>
 </div>
-<h1>{pig.name}</h1>
+<h1 class="my-3">{pig.name}</h1>
 <p>Dob:{birthDateFormat}</p>
 <p>Age: {years} years, {months} months</p>
 <p>Presumed pregnant: Yes</p>
@@ -95,22 +90,26 @@
 	<div class="col">
 		
 	</div>
-	<div id="carouselExampleControls" class="carousel  slide m-4" data-bs-ride="carousel">
+	<div id="carouselExampleControls" class="carousel  slide my-4" data-bs-ride="carousel">
 		<div class="carousel-inner">
-			{#each snapshots as snapshot, index}
-				<div class="carousel-item" class:active={index === 0}>
-					<img
-						class="d-block w-100"
-						style="object-fit: contain; max-height: 400px"
-						src={snapshot.img}
-					/>
-					<div class="carousel-caption d-none d-md-block">
-						<h3>{new Date(snapshot.timestamp).toLocaleDateString()}</h3>
-						<p>{snapshot.notes}</p>
-						
+			{#if (!snapshots.length)}
+    		<div class="text-center">No images to display</div>
+  		{:else}
+				{#each snapshots as snapshot, index}
+					<div class="carousel-item" class:active={index === 0}>
+						<img
+							class="d-block w-100"
+							style="object-fit: contain; max-height: 400px"
+							src={snapshot.img} alt="pig snapshot"
+						/>
+						<div class="carousel-caption d-none d-md-block">
+							<h3>{new Date(snapshot.timestamp).toLocaleDateString()}</h3>
+							<p>{snapshot.notes}</p>
+							
+						</div>
 					</div>
-				</div>
-			{/each}
+				{/each}
+			{/if}
 		</div>
 		<button
 			class="carousel-control-prev carousel-dark"
@@ -132,4 +131,4 @@
 		</button>
 	</div>
 </div>
-<a class="btn btn-primary" href="/pigs/addSnapshot/{pig._id}" >Add New Snapshot </a>
+<a class="btn btn-primary btn-sm p-1 mx-auto my-3" href="/pigs/addSnapshot/{pig._id}" >Add New Snapshot </a>

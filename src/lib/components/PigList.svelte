@@ -24,9 +24,11 @@
             <img class="rounded-1 w-100" src="{ pig.img }" alt="Photo of { pig.name }">
             <h2 class="h4 py-1">{pig.name}</h2>
             <p>{pig.description}</p>
-            <a class="btn btn-primary btn-sm p-1 mx-auto my-3" href="/pigs/edit/{ pig._id }">Edit</a>
-            <button class="btn btn-primary btn-sm p-1 mx-auto my-3" on:click={(e) => {deleteClicked(e, pig._id)}}>Delete</button>
-            <a class="btn btn-primary btn-sm p-1 mx-auto my-3" href="/pigs/addSnapshot/{ pig._id }">Add Snapshot</a>
+            <div class="d-flex">
+              <a class="btn btn-primary btn-sm p-1 mx-auto" href="/pigs/edit/{ pig._id }">Edit</a>
+              <button class="btn btn-primary btn-sm p-1 mx-auto" on:click={(e) => {deleteClicked(e, pig._id)}}>Delete</button>
+              <a class="btn btn-primary btn-sm p-1 mx-auto" href="/pigs/addSnapshot/{ pig._id }">Add Snapshot</a>
+            </div>
           </div>
         </a>
       </li>
@@ -42,5 +44,10 @@
 
   li:hover {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.26);
+  }
+
+  img {
+    height: 220px;
+    object-fit: cover;
   }
 </style>

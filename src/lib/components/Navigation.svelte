@@ -17,10 +17,6 @@
 			path: '/farms',
 			name: 'Farms',
 		},
-		{
-			path: '/testing',
-			name: 'Testing',
-		},
 	];
 
 	// Here we make a post to the logout page to destroy the session cookie
