@@ -132,3 +132,4 @@
 		</button>
 	</div>
 </div>
+<a class="btn btn-primary" href="/pigs/addSnapshot/{pig._id}" >Add New Snapshot </a>
