@@ -77,7 +77,19 @@ export default {
     if (!mongoose.Types.ObjectId.isValid(pig._id)) {
       return null;
     }
+    //add timezone offset so date is correct.
 
+    let offset = new Date().getTimezoneOffset()/60;
+    // console.log(`offset is ${offset}`);
+    
+    timestamp = new Date(timestamp);
+    // console.log(`timestamp before offset: ${timestamp}`);
+    
+    //added 
+    timestamp = timestamp.setHours(timestamp.getHours() + offset);
+    // let correctDate = new Date (timestamp)
+    // console.log(`timestamp after offset: ${correctDate}`);
+    
     const pigSnapshot = new PigSnapshot({
       pig:              pig._id,
       img:              img              || 'https://via.placeholder.com/300?text=Pig',

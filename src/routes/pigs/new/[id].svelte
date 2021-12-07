@@ -2,20 +2,15 @@
   import { page } from '$app/stores';
   import { goto } from '$app/navigation';
 
+  import { imageToBase64 } from '$lib/imageToBase64';
+
   let name: string;
   let description: string;
   let breed: string;
-  let dob: Date;
+  let dob: string;
   // let image: File;
   let errorMessage = '';
 
-  // Simple file to base64 string reader
-  const toBase64 = (file: File): Promise<string> => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result.toString());
-    reader.onerror = error => reject(error);
-  });
 
   async function registerPig(e: MouseEvent) {
     // Make sure we don't submit the form with HTML. We want to manually submit it
@@ -23,7 +18,7 @@
 
     const imageEl = document.querySelector('#image') as HTMLInputElement;
     const imageString = imageEl.files.length > 0
-      ? await toBase64(imageEl.files[0])
+      ? await imageToBase64(imageEl.files[0])
       : '';
 
     console.log(`Pig added ${name} ${description} ${breed} ${dob} ${$page.params.id}`);
@@ -35,7 +30,7 @@
 	  name,
 	  description,
 	  breed,
-	  dob,
+	  dob: new Date(dob),
 	  farmId: $page.params.id,
 	  image: imageString,
 	}),
@@ -44,9 +39,10 @@
 
     // console.log(res);
 
+
     if (res.ok) {
       const body = await res.json();
-      console.log(body);
+      // console.log(body);
 
       await goto(`/farms/${$page.params.id}`);
     } else {

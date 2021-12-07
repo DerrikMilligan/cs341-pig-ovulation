@@ -14,7 +14,7 @@
         }, null, 2),
       });
     
-      console.log(res);
+      // console.log(res);
     
       if (res.ok) {
         const body = await res.json();

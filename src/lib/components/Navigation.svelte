@@ -2,6 +2,8 @@
 	import { goto, invalidate } from '$app/navigation';
 	import { page } from '$app/stores';
 
+	export let loggedIn: boolean;
+
 	const routes = [
 		{
 			path: '/',
@@ -40,7 +42,9 @@
 			{#each routes as route}
 				<li class:active={$page.path === route.path}><a sveltekit:prefetch href={route.path}>{route.name}</a></li>
 			{/each}
+			{#if loggedIn}
 				<li><button on:click={logout}>Logout</button></li>
+			{/if}
 			</ul>
 		</nav>
 	</header>

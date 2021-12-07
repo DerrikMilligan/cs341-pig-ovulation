@@ -22,7 +22,9 @@
 		});
 
 		if (res.ok) {
-			goto(`/farms/${farm}`);
+			// goto(`/farms/${farm}`);
+			// window.location(`/farms/${farm}`);
+			window.location.reload();
 			const body = await res.json();
 			this.users = body.users;
 		}
@@ -62,12 +64,9 @@
 		<div class='col-auto'>
 			<input type='email' bind:value={email} class='form-control'>
 		</div>
-		<div class='col-auto'>
-			<button class='btn btn-primary btn-sm' href='/farms/addFarmUser/{email}'>Add User by Email</button>
-		</div>
-	</div>
-	<div class='col-auto'>
-		<button class='btn btn-primary btn-sm' on:click={() => addFarmUser(farmId, email)}>Add User by Email</button>
+	    <div class='col-auto'>
+		    <button class='btn btn-primary btn-sm' on:click={() => addFarmUser(farmId, email)}>Add User by Email</button>
+	    </div>
 	</div>
 </section>
 
