@@ -76,6 +76,7 @@
 		if (result.ok) {
 				const data = await result.json();
 				console.log("data");
+				window.location.href = `/pigs/${pig._id}`
 		}
   }
     
