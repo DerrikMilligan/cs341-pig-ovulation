@@ -2,6 +2,8 @@
 	import { userNeedsToLogin } from '$lib/guards';
 
 	export async function load({ page, session }) {
+  	const loggedIn = session !== null && session.user !== null && session.user !== undefined;
+
 		if (await userNeedsToLogin({ page, session })) {
 			return {
 				status: 302,
@@ -9,7 +11,11 @@
 			};
 		}
 
-		return {};
+		return {
+			props: {
+				loggedIn,
+			}
+		};
 	}
 </script>
 
@@ -20,13 +26,14 @@
 
 	// Import all the bootstrap styles
 	// import 'bootstrap/dist/css/bootstrap.min.css';
+	export let loggedIn: boolean;
 
 	// Import our global styles
 	import '../app.css';
 </script>
 
 
-<Navigation />
+<Navigation {loggedIn}/>
 
 <main class="container">
 	<slot />

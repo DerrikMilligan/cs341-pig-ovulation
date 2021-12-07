@@ -7,7 +7,7 @@
   let name: string;
   let description: string;
   let breed: string;
-  let dob: Date;
+  let dob: string;
   // let image: File;
   let errorMessage = '';
 
@@ -30,7 +30,7 @@
 	  name,
 	  description,
 	  breed,
-	  dob,
+	  dob: new Date(dob),
 	  farmId: $page.params.id,
 	  image: imageString,
 	}),

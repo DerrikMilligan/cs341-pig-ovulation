@@ -24,59 +24,64 @@
 </script>
 
 <script lang="ts">
-  import { page } from '$app/stores';
-	import { goto } from '$app/navigation';
+import { page } from '$app/stores';
+import { goto } from '$app/navigation';
 
-	let name: string;
-	let description: string;
-	let breed: string;
-	let dob: Date;
-	//let image: File;
-	let errorMessage = '';
+import type { Pig } from '$lib/types';
 
-	// Simple file to base64 string reader
-  const toBase64 = (file: File): Promise<string> => new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => resolve(reader.result.toString());
-    reader.onerror = error => reject(error);
-  });
+export let pig: Pig;
 
-	async function editPig(e) {
-    e.preventDefault();
+let name: string = pig.name;
+let description: string = pig.description;
+let breed: string = pig.breed;
+console.log(pig.birthDate.split('Z')[0]);
+let dob: string = new Date(pig.birthDate.split('Z')[0]).toLocaleDateString('en-CA');
 
-    const imageEl = document.querySelector('#image') as HTMLInputElement;
-    const imageString = await toBase64(imageEl.files[0]);
+//let image: File;
+let errorMessage = '';
 
-		const res = await fetch(
-			'/pigs/editPig',
-			{
-				method: 'POST',
-				body: JSON.stringify({
-					_id: $page.params.id,
-					name,
-					description,
-					breed,
-					dob,
-          image: imageString,
-				}),
-			},
-		);
+// Simple file to base64 string reader
+const toBase64 = (file: File): Promise<string> => new Promise((resolve, reject) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => resolve(reader.result.toString());
+  reader.onerror = error => reject(error);
+});
 
-    // console.log(res);
+async function editPig(e) {
+  e.preventDefault();
 
-		if (res.ok) {
-			const body = await res.json();
+  const imageEl = document.querySelector('#image') as HTMLInputElement;
+  const imageString = await toBase64(imageEl.files[0]);
+
+  const res = await fetch(
+    '/pigs/editPig',
+    {
+      method: 'POST',
+      body: JSON.stringify({
+	_id: $page.params.id,
+	name,
+	description,
+	breed,
+	dob,
+	image: imageString,
+      }),
+    },
+  );
+
+  // console.log(res);
+
+  if (res.ok) {
+    const body = await res.json();
     //   console.log(body);
 
-			await goto(`/pigs/${$page.params.id}`);
-		} else {
-			const body = await res.json();
-      console.log('ERROR!');
-			errorMessage = body.message;
-		}
-	}
-
+    await goto(`/pigs/${$page.params.id}`);
+  } else {
+    const body = await res.json();
+    console.log('ERROR!');
+    errorMessage = body.message;
+  }
+}
 </script>
 
 <svelte:head>
@@ -111,10 +116,10 @@
 			<label for="dob"> Aproximate Date of Birth</label>
 			<input bind:value={dob} type="date" class="form-control" name="dob" id="dob"/><br />
 		</div>
-		<div class="form-group">
-			<label for="image">Image</label>
-			<input type="file" class="form-control" name="image" id="image"/><br>
-		</div>
+		<!-- <div class="form-group"> -->
+		<!-- 	<label for="image">Image</label> -->
+		<!-- 	<input type="file" class="form-control" name="image" id="image"/><br> -->
+		<!-- </div> -->
 		<button type="submit" class="btn btn-primary" on:click="{editPig}">Edit Pig</button>
 	</form>
 </section>
