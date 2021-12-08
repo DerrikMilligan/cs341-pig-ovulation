@@ -61,6 +61,11 @@
 
 <section>
 	<form>
+		{#if errorMessage.length > 0}
+		<div class="alert alert-danger py-2" role="alert">
+			{errorMessage}
+		</div>
+		{/if}
 		<div class="form-group">
 			<label for="name">Pig Name</label><br />
 			<input bind:value={name} type="text" class="form-control" name="name" id="name" placeholder="Wilbur" /><br />
@@ -90,10 +95,5 @@
 			<input type="file" class="form-control" name="image" id="image"/><br>
 		</div>
 		<button type="submit" class="btn btn-primary" on:click="{registerPig}">Add Pig to Farm</button>
-		{#if errorMessage}
-		<div>
-			{errorMessage}
-		</div>
-		{/if}
 	</form>
 </section>

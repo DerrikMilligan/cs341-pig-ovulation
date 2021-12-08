@@ -36,23 +36,11 @@ let description: string = pig.description;
 let breed: string = pig.breed;
 console.log(pig.birthDate.split('Z')[0]);
 let dob: string = new Date(pig.birthDate.split('Z')[0]).toLocaleDateString('en-CA');
-
-//let image: File;
 let errorMessage = '';
 
-// Simple file to base64 string reader
-const toBase64 = (file: File): Promise<string> => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => resolve(reader.result.toString());
-  reader.onerror = error => reject(error);
-});
 
 async function editPig(e) {
   e.preventDefault();
-
-  // const imageEl = document.querySelector('#image') as HTMLInputElement;
-  // const imageString = await toBase64(imageEl.files[0]);
 
   const res = await fetch(
     '/pigs/editPig',
@@ -90,6 +78,11 @@ async function editPig(e) {
 <h1>Edit Pig</h1>
 
 <section>
+	{#if errorMessage.length > 0}
+	<div class="alert alert-danger py-2" role="alert">
+		{errorMessage}
+	</div>
+	{/if}
 	<form>
 		<div class="form-group">
 			<label for="name">Pig Name</label><br />
@@ -115,10 +108,6 @@ async function editPig(e) {
 			<label for="dob"> Aproximate Date of Birth</label>
 			<input bind:value={dob} type="date" class="form-control" name="dob" id="dob"/><br />
 		</div>
-		<!-- <div class="form-group"> -->
-		<!-- 	<label for="image">Image</label> -->
-		<!-- 	<input type="file" class="form-control" name="image" id="image"/><br> -->
-		<!-- </div> -->
 		<button type="submit" class="btn btn-primary" on:click="{editPig}">Edit Pig</button>
 	</form>
 </section>

@@ -1,5 +1,6 @@
 import { connectToDatabase, Pig } from '$lib/models';
 import { userNeedsToLogin } from '$lib/guards';
+import { errorMessage, successMessage } from '$lib/apiResponseHelpers';
 
 export const post = async (req) => {
   // Verify the user is logged in otherwise move on
@@ -18,9 +19,27 @@ export const post = async (req) => {
     };
   }
 
+  const data = (JSON.parse(req.body));
+
+  if (data.name === undefined || data.name.length <= 0) {
+    return errorMessage('Name required.');
+  }
+
+  if (data.description === undefined || data.description.length <= 0) {
+    return errorMessage('Name required.');
+  }
+
+  if (data.breed === undefined || data.breed.length <= 0) {
+    return errorMessage('Breed required.');
+  }
+
+  if (data.dob === undefined || data.dob.length <= 0) {
+    return errorMessage('Birthdate required.');
+  }
+
   await connectToDatabase();
 
-  const pig = await Pig.edit(JSON.parse(req.body));
+  const pig = await Pig.edit(data);
   
   return {
     status: 200,

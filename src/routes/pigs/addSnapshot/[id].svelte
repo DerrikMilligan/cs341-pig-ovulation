@@ -45,7 +45,8 @@
   let year = today.getFullYear();
   let date = today.toLocaleDateString('en-CA');
   let yearFirst = ` ${year}-${month}-${day} `;
-  let dateFormatted =`${day}/${month}/${year} `
+  let dateFormatted =`${day}/${month}/${year} `;
+	let errorMessage = "";
    
   async function addPigSnapshot(e: MouseEvent) {
 		e.preventDefault();
@@ -77,7 +78,11 @@
 				const data = await result.json();
 				console.log("data");
 				window.location.href = `/pigs/${pig._id}`
-		}
+		} else {
+      const body = await result.json();
+      console.log('ERROR!');
+      errorMessage = body.message;
+    }
   }
     
 	
@@ -89,6 +94,11 @@
 
 <h1> { date }</h1>
 
+{#if errorMessage.length > 0}
+<div class="alert alert-danger py-2" role="alert">
+	{errorMessage}
+</div>
+{/if}
 <form>
     
     <div class="form-group">
