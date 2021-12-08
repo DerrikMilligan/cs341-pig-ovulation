@@ -13,8 +13,7 @@ export const post = async (req) => {
 			},
 		};
 	}
-
-	if (req.body.userId) {
+	if (!req.body.userId) {
 		return {
 			status: 400,
 			body: {

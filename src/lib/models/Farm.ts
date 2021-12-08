@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 
 import { userSchema } from './User';
+import { User } from '$lib/models/index';
 // Create the schema
 export const farmSchema = new mongoose.Schema({
 	name: String,
@@ -58,12 +59,14 @@ export default {
 		return farm;
 	},
 
-	removeUser: async (farmId, user) => {
+	removeUser: async (farmId, userId) => {
 		// if (!mongoose.Types.ObjectId.isValid(farm._id) || !mongoose.Types.ObjectId.isValid(user._id)) {
 		// 	return null;
 		// }
 
 		// farm.users.pull(user);
+
+		const user = User.get(userId);
 
 		const farm = await Farm.findByIdAndUpdate({_id: farmId}, {
 			$pull: { users: user }
