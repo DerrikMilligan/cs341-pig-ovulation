@@ -103,12 +103,12 @@ export default {
     return pigSnapshot;
   },
 
-  getSnapshots: async (pig) => {
+  getSnapshots: async (pig, limit: number = 3) => {
     if (!mongoose.Types.ObjectId.isValid(pig._id)) {
       return null;
     }
 
-    return await PigSnapshot.find({ pig: pig._id }).exec();
+    return await PigSnapshot.find({ pig: pig._id }).sort({ timestamp: 'descending' }).limit(limit).exec();
   }
 
 };
