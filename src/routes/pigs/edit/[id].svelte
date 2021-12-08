@@ -51,8 +51,8 @@ const toBase64 = (file: File): Promise<string> => new Promise((resolve, reject) 
 async function editPig(e) {
   e.preventDefault();
 
-  const imageEl = document.querySelector('#image') as HTMLInputElement;
-  const imageString = await toBase64(imageEl.files[0]);
+  // const imageEl = document.querySelector('#image') as HTMLInputElement;
+  // const imageString = await toBase64(imageEl.files[0]);
 
   const res = await fetch(
     '/pigs/editPig',
@@ -63,8 +63,7 @@ async function editPig(e) {
 	name,
 	description,
 	breed,
-	dob,
-	image: imageString,
+	dob
       }),
     },
   );
