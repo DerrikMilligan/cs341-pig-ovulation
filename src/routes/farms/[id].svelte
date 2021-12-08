@@ -16,6 +16,7 @@
 		let props = {
 			pigs: [],
 			users: [],
+			farm: {}
 		};
 
 
@@ -38,8 +39,10 @@
 
 		if (userRes.ok) {
 			const body = await userRes.json();
+			console.log(body);
 
 			props.users = body.farms.users;
+			props.farm = body.farms
 		}
 
 		return { props };
@@ -51,6 +54,7 @@
 	import { goto } from '$app/navigation';
 	import type { Pig } from '$lib/types';
 	import type { User } from '$lib/types';
+	import type { Farm } from '$lib/types';
 	import PigList from '$lib/components/PigList.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import UserList from '$lib/components/UserList.svelte';
@@ -60,6 +64,7 @@
 	let pigId;
 	let errorMessage = '';
 	export let users: User[];
+	export let farm: Farm;
 
 	function showModal(event) {
 		console.log(`delete modal for pig: ${event.detail.pigId}`);
@@ -99,7 +104,7 @@
 	<title>My Farm</title>
 </svelte:head>
 
-<h1 class='mx-auto my-3'>My Farm</h1>
+<h1 class='mx-auto my-3'>{farm.name}</h1>
 
 <a class='btn btn-primary btn-sm p-1 mx-auto my-3' href='/pigs/new/{$page.params.id}'>Add New Pig</a>
 
@@ -110,7 +115,7 @@
 	<Modal>
 		<h1 slot="header">Deleting Pig</h1>
 		<div slot="content" class="pt-4">
-			<p>Are you sure you would like to delete you pig?</p>
+			<p>Are you sure you would like to delete your pig?</p>
 			<button class="btn btn-primary btn-sm p-1" on:click={(e) => {e.preventDefault(); show = false;}}>Cancel</button>
 			<button class="btn btn-primary btn-sm p-1" on:click={() => deletePig(pigId)}>Delete Pig</button>
 		</div>
