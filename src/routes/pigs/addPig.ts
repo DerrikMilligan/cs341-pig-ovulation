@@ -26,7 +26,7 @@ export const post = async (req) => {
   }
 
   if (data.description === undefined || data.description.length <= 0) {
-    return errorMessage('Name required.');
+    return errorMessage('Description required.');
   }
 
   if (data.breed === undefined || data.breed.length <= 0) {
