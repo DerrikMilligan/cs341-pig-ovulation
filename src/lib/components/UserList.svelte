@@ -33,8 +33,26 @@
 
 	}
 
-	function removeFarmUser(farm, id) {
-		console.log('Removing user _id ', id, ' to ', farm);
+	export async function removeFarmUser(farm, id) {
+		const res = await fetch('/farms/removeFarmUser', {
+			method: 'post',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				farmId: farm,
+				userId: id
+			}, null, 2)
+		});
+
+		if (res.ok) {
+			window.location.reload();
+			const body = await res.json();
+			this.users = body.users;
+		}
+
+		return users;
 	}
 
 </script>
@@ -49,8 +67,7 @@
 				{#each users as user}
 					<div class='row g-3 align-items-center'>
 						<div class='col-auto'>
-							<button class='btn btn-sm remove-user' on:click={removeFarmUser(farmId, user._id)}>X
-							</button>
+							<button class='btn btn-sm remove-user' on:click={() => removeFarmUser(farmId, user._id)}>X</button>
 						</div>
 						<div class='col-auto'>
 							<li style='padding-right: 1em;'>{ user.email }</li>

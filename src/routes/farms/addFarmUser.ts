@@ -27,8 +27,6 @@ export const post = async (req) => {
 			},
 		};
 	}
-	console.log("Add User Request Body", req.body);
-
 	const newUser = Farm.addUser(req.body.farmId, user);
 	return {
 		status: 200,
