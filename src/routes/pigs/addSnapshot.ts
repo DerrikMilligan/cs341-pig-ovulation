@@ -1,5 +1,6 @@
 import { connectToDatabase, Pig } from '$lib/models';
 import { userNeedsToLogin } from '$lib/guards';
+import { errorMessage, successMessage } from '$lib/apiResponseHelpers';
 
 export const post = async (req) => {
   // Verify the user is logged in otherwise move on
@@ -18,9 +19,17 @@ export const post = async (req) => {
     };
   }
 
-  await connectToDatabase();
-
   const data = req.body;
+  
+  if (data.img === undefined || data.img.length <= 0) {
+    return errorMessage('Image required.');
+  }
+
+  if (data.timestamp === undefined || data.timestamp.length <= 0) {
+    return errorMessage('Date of image required.');
+  }
+
+  await connectToDatabase();
 
   const pig = await Pig.getById(data.pig);
   const snapshot = await Pig.createSnapshot(pig, data);

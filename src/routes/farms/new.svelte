@@ -2,7 +2,8 @@
 	import { goto } from '$app/navigation';
 	let farmName, farmRegion, errorMessage = '';
 
-	async function createFarm() {
+	async function createFarm(e) {
+		e.preventDefault();
 		errorMessage = '';
 
 		const res = await fetch(
@@ -31,6 +32,11 @@
 </svelte:head>
 
 <section>
+	{#if errorMessage.length > 0}
+	<div class="alert alert-danger py-2" role="alert">
+		{errorMessage}
+	</div>
+	{/if}
 	<form>
 		<div class='form-group'>
 			<label for='farmName' class='form-label'>Farm Name</label>
@@ -42,11 +48,6 @@
 			<input type='text' bind:value={farmRegion} class='form-control' name='farmRegion' id='farmRegion'>
 		</div>
 
-		<button class='btn btn-primary' on:click={createFarm}> Add Farm</button>
-		{#if errorMessage.length > 0}
-			<div class="alert alert-danger py-2" role="alert">
-				{errorMessage}
-			</div>
-		{/if}
+		<button class='btn btn-primary mt-3' on:click={createFarm}> Add Farm</button>
 	</form>
 </section>
