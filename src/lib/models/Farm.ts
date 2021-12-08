@@ -64,8 +64,6 @@ export default {
 			.populate('users')
 			.exec();
 
-		console.log(farm.users);
-
 		farm.users = farm.users.filter((user) => user._id.toString() !== userId);
 
 		await farm.save();
