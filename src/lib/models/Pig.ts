@@ -52,13 +52,12 @@ export default {
     return pig;
   },
 
-  edit: async ({ _id, name, img, dob, breed, description}) => {
+  edit: async ({ _id, name, dob, breed, description}) => {
     const pig = await Pig.findByIdAndUpdate({_id},{
       name,
       breed,
       description,
-      birthDate: dob,
-      img: img || 'https://via.placeholder.com/300?text=Pig'
+      birthDate: dob
     });
     
     return pig;
