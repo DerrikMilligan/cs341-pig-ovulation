@@ -84,8 +84,7 @@
 <h1 class="my-3">{pig.name}</h1>
 <p>Dob:{birthDateFormat}</p>
 <p>Age: {years} years, {months} months</p>
-<p>Presumed pregnant: Yes</p>
-<p>Date of last observed swelling:</p>
+
 <div class="row">
 	<div class="col">
 		
