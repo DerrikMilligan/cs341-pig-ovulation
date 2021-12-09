@@ -21,7 +21,6 @@
       ? await imageToBase64(imageEl.files[0])
       : '';
 
-    console.log(`Pig added ${name} ${description} ${breed} ${dob} ${$page.params.id}`);
     const res = await fetch(
       '/pigs/addPig',
       {
@@ -37,17 +36,13 @@
       },
     );
 
-    // console.log(res);
-
 
     if (res.ok) {
       const body = await res.json();
-      // console.log(body);
 
       await goto(`/farms/${$page.params.id}`);
     } else {
       const body = await res.json();
-      console.log('ERROR!');
       errorMessage = body.message;
     }
   }

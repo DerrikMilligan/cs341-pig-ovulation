@@ -1,8 +1,6 @@
 import { connectToDatabase, Pig } from '$lib/models';
 import { userNeedsToLogin } from '$lib/guards';
 
-
-
 export const get = async (req, res) => {
   return {
     status: 200,
@@ -34,7 +32,6 @@ export const post = async (req, res) => {
   if (req.body !== undefined && req.body.pigId !== undefined) {
     const pig = await Pig.getById(req.body.pigId);
 
-    // console.log(pig);
     return {
       status: 200,
       body: {
@@ -48,3 +45,4 @@ export const post = async (req, res) => {
     redirect: '/farms',
   }
 }
+

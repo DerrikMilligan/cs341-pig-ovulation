@@ -14,8 +14,6 @@
 		if (res.ok) {
       const body = await res.json();
 
-    //   console.log(body);
-
       return {
         props: { pig: body.pig, },
       };
@@ -34,7 +32,6 @@ export let pig: Pig;
 let name: string = pig.name;
 let description: string = pig.description;
 let breed: string = pig.breed;
-console.log(pig.birthDate.split('Z')[0]);
 let dob: string = new Date(pig.birthDate.split('Z')[0]).toLocaleDateString('en-CA');
 let errorMessage = '';
 
@@ -56,16 +53,12 @@ async function editPig(e) {
     },
   );
 
-  // console.log(res);
-
   if (res.ok) {
     const body = await res.json();
-    //   console.log(body);
 
     await goto(`/pigs/${$page.params.id}`);
   } else {
     const body = await res.json();
-    console.log('ERROR!');
     errorMessage = body.message;
   }
 }

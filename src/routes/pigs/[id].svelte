@@ -49,24 +49,16 @@
 	export let snapshots: PigSnapshot[] = [];
 	 let today =  Date.now();
 	 let newtoday = new Date(today);
-	 console.log(newtoday);
 	 let birthDate = new Date(pig.birthDate)
 	 let birthYear = birthDate.getFullYear();
-	//  console.log(birthYear);
 	let birthMonth = birthDate.getMonth()+1;
 	let birthday = birthDate.getDate();
 	let birthDateFormat = `${birthMonth}/${birthday}/${birthYear}`
 	 
 	 let birthTime =birthDate.getTime()
-	 console.log(`birthtime is ${birthTime}`);
-	 
-	 console.log(pig.birthDate);
-	 console.log(birthDate);
 	 let months = new Date(today - birthTime).getMonth() % 12;
-	 console.log(months);
 	 
 	 let years = new Date(today - birthTime).getFullYear()-1970;
-	 console.log(years);
 </script>
 
 <svelte:head>

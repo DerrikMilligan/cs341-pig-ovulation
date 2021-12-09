@@ -71,8 +71,6 @@ export default {
       return false;
     }
 
-    console.log(`[Model][User][validatePassword] Testing ${user.email}'s password against: '${password}'`);
-
     return await bcrypt.compare(password, user.password);
   },
 

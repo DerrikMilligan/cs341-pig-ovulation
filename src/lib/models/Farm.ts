@@ -30,6 +30,16 @@ export default {
 		return await Farm.find({ 'users._id': user._id }).populate('users').exec();
 	},
 
+	delete: async (farm): Promise<boolean> => {
+		if (!mongoose.Types.ObjectId.isValid(farm._id)) {
+			return false;
+		}
+
+		await Farm.deleteOne({ _id: farm._id }).exec();
+
+		return true;
+	},
+
 	// Create a new farm
 	create: async ({ name, region, user }) => {
 		const farm = new Farm({

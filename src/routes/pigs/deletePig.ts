@@ -20,8 +20,6 @@ export const post = async (req) => {
 
   await connectToDatabase();
 
-  console.log(JSON.parse(req.body));
-
   const response = await Pig.del(JSON.parse(req.body));
 
   return {

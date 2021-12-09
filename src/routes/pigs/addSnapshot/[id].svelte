@@ -14,8 +14,6 @@
 		if (res.ok) {
 			const body = await res.json();
 
-			//   console.log(body);
-
 			return {
 				props: { pig: body.pig }
 			};
@@ -50,8 +48,6 @@
    
   async function addPigSnapshot(e: MouseEvent) {
 		e.preventDefault();
-		console.log("adding snapshot");
-		
 
     const imageEl = document.querySelector('#image') as HTMLInputElement;
     const imageString = imageEl.files.length > 0
@@ -76,11 +72,9 @@
 
 		if (result.ok) {
 				const data = await result.json();
-				console.log("data");
 				window.location.href = `/pigs/${pig._id}`
 		} else {
       const body = await result.json();
-      console.log('ERROR!');
       errorMessage = body.message;
     }
   }

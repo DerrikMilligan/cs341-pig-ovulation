@@ -1,8 +1,7 @@
 <script context="module" lang="ts">
     export async function load({ fetch, page }) {
       const _id = 1;
-      console.log(_id);
-    
+
       const res = await fetch('/pigs/getpigs', {
         method: 'post',
         headers: {
@@ -13,8 +12,6 @@
           farmId: _id,
         }, null, 2),
       });
-    
-      // console.log(res);
     
       if (res.ok) {
         const body = await res.json();
