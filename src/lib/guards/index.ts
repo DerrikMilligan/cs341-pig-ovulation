@@ -3,6 +3,7 @@ const loginPath = '/login';
 
 const whiteListedPaths = [
   '/',
+  '/about',
   '/login',
   '/register',
 ];
